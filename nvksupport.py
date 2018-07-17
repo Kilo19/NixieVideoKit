@@ -212,7 +212,7 @@ def ConvertAudio(videoIn, audioOut):
 				'-c:a', 'pcm_s16le',
 				'-f', 'wav', '-']
 		fdk_args = [fdk_exec,
-				'-I', '-m', '3', '-',
+				'-I', '-m', '5', '-',
 				'-o', audioOut]
 		p1 = subprocess.Popen(ffmpeg_args, stdout=subprocess.PIPE)
 		p2 = subprocess.Popen(fdk_args, stdin=p1.stdout)
