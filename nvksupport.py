@@ -71,38 +71,40 @@ def ConvertPath(inPath):
 	inPath = inPath.strip()
 	inPath = inPath.replace('\"', '')
 	inPath = inPath.replace('\\\\', '\\')
-	localPath = inPath
-	if os.path.isdir(localPath) and not localPath.endswith(os.sep):
-		localPath += os.sep
-	if os.path.exists(localPath):
-		return localPath
-
-	anchor = localPath.find(settings.customDownDirRelative)
-	if anchor != -1:
-		localPath = settings.customDownDirRoot + localPath[anchor:]
-	if os.path.exists(localPath):
-		return localPath
-
-	anchor = localPath.find(settings.cloudDir)
-	if anchor == -1:
-		return inPath
+	# An URL
+	if inPath.startswith("http"):
+		#try to find corresponding local address from NixieCloud address
+		localPath = urllib.parse.unquote_plus(inPath)
+		anchor = localPath.find(settings.cloudDir)
+		if anchor == -1:
+			return inPath
+		else:
+			localPath = settings.cloudRoot + localPath[anchor:]
+		if os.path.isdir(localPath) and localPath.endswith(os.sep):
+			localPath += os.sep
+		if not os.path.exists(localPath):
+			localPath = localPath.replace('&files=', os.sep)
+	# local path
 	else:
-		localPath = settings.cloudRoot + localPath[anchor:]
-	if os.path.exists(localPath):
-		return localPath
+		# two replacements so that it works on Windows and POSIX
+		localPath = inPath.replace('/', os.sep).replace('\\', os.sep)
+		if os.path.isdir(localPath) and not localPath.endswith(os.sep):
+			localPath += os.sep
+		if os.path.exists(localPath):
+			return localPath
+		anchor = localPath.find(settings.customDownDirRelative)
+		if anchor != -1:
+			localPath = settings.customDownDirRoot + localPath[anchor:]
+		if os.path.exists(localPath):
+			return localPath
 
-	#try to find corresponding local address from NixieCloud address
-	localPath = urllib.parse.unquote_plus(inPath)
-	anchor = localPath.find(settings.cloudDir)
-	if anchor == -1:
-		return inPath
-	else:
-		localPath = settings.cloudRoot + localPath[anchor:]
-	if os.path.isdir(localPath) and localPath.endswith(os.sep):
-		localPath += os.sep
-	if not os.path.exists(localPath):
-		localPath = localPath.replace('&files=', os.sep)
-
+		anchor = localPath.find(settings.cloudDir)
+		if anchor == -1:
+			return inPath
+		else:
+			localPath = settings.cloudRoot + localPath[anchor:]
+		if os.path.exists(localPath):
+			return localPath
 	return localPath
 
 #VapourSynth某些插件识别unicode/GBK符号有问题，此处替换
