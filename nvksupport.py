@@ -71,10 +71,9 @@ def ConvertPath(inPath):
 	inPath = inPath.strip()
 	inPath = inPath.replace('\"', '')
 	inPath = inPath.replace('\\\\', '\\')
-	inPath = inPath.replace('/', '\\')
 	localPath = inPath
-	if os.path.isdir(localPath) and localPath[-1] != '\\':
-		localPath += '\\'
+	if os.path.isdir(localPath) and not localPath.endswith(os.sep):
+		localPath += os.sep
 	if os.path.exists(localPath):
 		return localPath
 
@@ -92,18 +91,17 @@ def ConvertPath(inPath):
 	if os.path.exists(localPath):
 		return localPath
 
-	inPath = inPath.replace('\\', '/')
 	#try to find corresponding local address from NixieCloud address
-	localPath = urllib.parse.unquote_plus(inPath).replace('/','\\')
+	localPath = urllib.parse.unquote_plus(inPath)
 	anchor = localPath.find(settings.cloudDir)
 	if anchor == -1:
 		return inPath
 	else:
 		localPath = settings.cloudRoot + localPath[anchor:]
-	if os.path.isdir(localPath) and localPath[-1] != '\\':
-		localPath += '\\'
+	if os.path.isdir(localPath) and localPath.endswith(os.sep):
+		localPath += os.sep
 	if not os.path.exists(localPath):
-		localPath = localPath.replace('&files=', '\\')
+		localPath = localPath.replace('&files=', os.sep)
 
 	return localPath
 
@@ -123,8 +121,6 @@ def ReplaceNaughtyCharacters(source, troubleList):
 def DownloadVid(url, folder):
 	down = {}
 	downJson = None
-	if folder[-1] != '\\':
-		folder += '\\'
 
 	if "youtube.com" in url or "youtu.be" in url:
 		if not settings.source720p:
@@ -170,8 +166,10 @@ def GetTemp(sourceVideo_split):
 	temp = {}
 	#temp['path'] = tempDir + tempName
 	#This path does follow the number rule
-	temp['ffindex_path'] = os.path.join(sourceVideo_split[0], sourceVideo_split[1] + sourceVideo_split[2] + '.ffindex')
-	print(temp['ffindex_path'])
+	temp['ffindex_path'] = os.path.join(
+		sourceVideo_split[0],
+		sourceVideo_split[1] + sourceVideo_split[2] + '.ffindex'
+	)
 
 	temp['path'] = os.path.join(tempDir, serial)
 	temp['audio_path'] = temp['path'] + '_a.m4a'
@@ -245,7 +243,7 @@ def GetContainer(filename):
 	return out.lower().decode()
 
 def quoted(s):
-	return '\"' + s + '\"'
+	return '"' + s + '"'
 
 def findRateVideo(filename):
 	cmnd = [ffprobe_exec,
@@ -466,7 +464,6 @@ def Remux(vStream, aStream, outPath):
 					'-i', vStream, '-i', aStream,
 					'-c', 'copy', '-y',
 					outPath]
-	print(remuxArg_ffmpeg)
 	subprocess.run(remuxArg_ffmpeg)
 
 def nce():
@@ -503,20 +500,24 @@ def nce():
 		json.dump(downJson, outJsonFile)
 		outJsonFile.close()
 		#let AutoNCE take care of us
-		downImage = os.path.join(sourceVideo_split[0],
-								 sourceVideo_split[1] + os.path.splitext(downJson['thumbnail'])[-1])
+		downImage = os.path.join(
+			sourceVideo_split[0],
+			sourceVideo_split[1] + os.path.splitext(downJson['thumbnail'])[-1]
+		)
 		shutil.move(downImage, settings.customOutDir)
-		Remux(down['video'], down['audio'],
-				os.path.join(settings.customDownDir,
-							 sourceVideo_split[1] + '_remux' + sourceVideo_split[2]))
+		Remux(
+			down['video'], down['audio'],
+			os.path.join(
+				settings.customDownDir,
+				sourceVideo_split[1] + '_remux' + sourceVideo_split[2]
+			)
+		)
 		safeDeleteFile(down['video'])
 		safeDeleteFile(down['audio'])
 		return
 
 	sourceVideo_split = list(os.path.split(sourceVideo))
 	sourceVideo_split[1:] = os.path.splitext(sourceVideo_split[1])
-	print(sourceVideo_split[1])
-
 	temp = GetTemp(sourceVideo_split)
 	#bitrate MUST be an integer, or x264 would yell at you
 	print('Target video bit rate: ' + str(settings.nceBitrate) + 'kbps')
@@ -533,7 +534,6 @@ def nce():
 		outPath = outPathCommon
 	else:
 		outPath = sourceVideo_split[0]
-
 	outTxtPath = os.path.join(outPath, outTxtName)
 	commandTimeString = time.ctime()
 	txtPrompt = ['#生肉下令时间 (远程机时间) : ' + commandTimeString,

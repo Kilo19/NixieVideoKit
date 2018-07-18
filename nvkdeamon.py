@@ -27,7 +27,8 @@ def ListIngredients(dirPath, name, ext):
 			if root == dirPath:
 				for file in files:
 					if not name in file and file[-3:] == ext:
-						myIngredients.add(os.path.join(root, file) + '\n')
+						fileStr = os.path.join(root, file) + '\n'
+						myIngredients.add(fileStr)
 	return myIngredients
 
 def ListFile(dirPath, name, ext):
@@ -36,7 +37,8 @@ def ListFile(dirPath, name, ext):
 		for root, dirs, files in os.walk(dirPath):
 			for file in files:
 				if file[-3:] == ext and name in file:
-					candidates.add(os.path.join(root, file) + '\n')
+					fileStr = os.path.join(root, file) + '\n'
+					candidates.add(fileStr)
 	return candidates
 
 def SafeReadandWriteHead(inName, fileHead = None):
@@ -82,8 +84,12 @@ def DeamonHelper(inName, argLen, scriptName, fileHead):
 			print(inName + ' command: ' + time.ctime())
 			for arg in args:
 				print(arg)
-			subprocess.Popen(['py', '-3', os.path.join(scriptDir, scriptName + '.py')] + args,
-							 creationflags = subprocess.CREATE_NEW_CONSOLE)
+			subprocess.Popen(
+				[
+					'py', '-3', os.path.join(scriptDir, scriptName + '.py')
+				] + args,
+				creationflags = subprocess.CREATE_NEW_CONSOLE
+			 )
 
 if __name__ == "__main__":
 	print("NVK Deamon online: " + time.ctime())
@@ -114,7 +120,9 @@ if __name__ == "__main__":
 		DeamonHelper("ing", 1, "NixieCloud_Enc", ingHead)
 		DeamonHelper("BE", 3, "Bili_Enc", beHead)
 
-		ingredientsListPath = os.path.join(customDownDir, 'ingredientsList' + '.txt')
+		ingredientsListPath = os.path.join(
+			customDownDir, 'ingredientsList' + '.txt'
+		)
 		ingredients = ListIngredients(customDownDir, '[BE_', 'mp4')
 
 		cookedPath = os.path.join(customDownDir, 'cookedList' + '.txt')
@@ -130,11 +138,17 @@ if __name__ == "__main__":
 			for newIng in newIngs:
 				print(newIng)
 				newIngStripped = newIng.strip()
-				newIngStripped = nvksupport.ReplaceNaughtyCharacters(newIngStripped, nvksupport.tl)
-				subprocess.Popen(['py', '-3',
-								os.path.join(scriptDir, "NixieCloud_Enc" + '.py'),
-								newIngStripped],
-								creationflags=subprocess.CREATE_NEW_CONSOLE)
+				newIngStripped = nvksupport.ReplaceNaughtyCharacters(
+					newIngStripped, nvksupport.tl
+				)
+				subprocess.Popen(
+					[
+						'py', '-3',
+						os.path.join(scriptDir, "NixieCloud_Enc" + '.py'),
+						newIngStripped
+					],
+					creationflags=subprocess.CREATE_NEW_CONSOLE
+				)
 			ingredients = ListIngredients(customDownDir, '[BE_', 'mp4')
 			print("writeIng: " + time.ctime())
 			outFile = codecs.open(ingredientsListPath, 'w', 'utf-8')
