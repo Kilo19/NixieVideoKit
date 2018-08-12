@@ -1,0 +1,1 @@
+﻿built fdkaac (https://github.com/nu774/fdkaac) with fdkaac_autobuild (https://github.com/nu774/fdkaac_autobuild)

@@ -3,8 +3,6 @@ __pycache__/
 
 jolt\.py
 
-Program/
-
 *.pyc
 
 settings\.py

@@ -1,5 +1,5 @@
-## 本代码库存放辉光字幕组部分辅助工具，大部分文件没有文档  
-**本代码库采用MIT协议，但"辉光样式.ass"除外，下方详述**  
+#代码库结构  
+本代码库存放辉光字幕组部分辅助工具，大部分文件没有文档  
 - nvksupport.py：压制工具  
 - nvkdeamon.py：监视生肉文件夹并自动压制，监视下令txt并启动熟肉压制  
 - paam.py, prr.py：压制/混流校对录像音频  
@@ -7,11 +7,15 @@
 - NixieCloud_Enc.py：启动生肉/预览版压制  
 - settings - sample.py：nvksupport的配置文件，详情查看文件内注释。使用时请更名为settings.py  
 - voicebase.py：抓取机器识别稿，自带时间戳，精确到词，需要有* * * voicebase的token才能使用  
-- Full-auto_M134_public.py: 从双语文本稿生成ass文件，如果搭配voicebase输出的json可以自动生成时间戳（打轴）
+- Full-auto_M134_public.py: 从双语文本稿生成ass文件，如果搭配voicebase输出的json可以自动生成时间戳（打轴）  
 - 翻译分段.py：按视频长度和翻译人数生成每个翻译负责的时间段  
 - Adaptive CRF.tm & .pdf：论证了CRF和视频体积的关系（英文）  
-- hardSub.vpy：熟肉/上传版压制需要的VapourSynth脚本
+- hardSub.vpy：熟肉/上传版压制需要的VapourSynth脚本  
 - 辉光样式.ass：辉光字幕组使用的字幕样式，下载后用aegisub打开，样式管理器中即有全部样式。如需使用请遵守下方协议  
+
+#授权协议  
+本代码库中文件如无说明均采用MIT协议，引用自其他库的代码遵循源协议  
+"辉光样式.ass"不采用MIT，下方详述协议  
 
 ## 使用辉光样式  
 本样式脚本分辨率 (https://aegi.vmoe.info/docs/3.2/Script_Resolution/) 固定1280x720  
@@ -37,3 +41,23 @@
 - 不使用ass字幕文件，而在其他软件中重现此样式  
 
 此时可选择注明“样式修改自辉光字幕组样式”并提供本库链接，但不必须。  
+
+#安装  
+将settings - sample.py重命名为settings.py  
+安装python 3.6 (https://www.python.org/downloads/)，3.6中任何一个子版本均可  
+32(x86)或64位(x86-64)均可，但后面安装VapourSynth和VSFilterMod需要匹配  
+32位库更多，上手的话个人建议32位  
+**安装时勾选Add Python to PATH**，结束时建议选择Disable Path Length Limit  
+Install for all users可以不选，选了的话未来通过pip安装新的python库需要管理员权限  
+安装ffmpeg (https://ffmpeg.org/) 建议走chocolatey (https://chocolatey.org/)  
+chocolatey的ffmpeg包地址: https://chocolatey.org/packages/ffmpeg  
+代码库自带编译好的fdkaac (位于Program文件夹下)，无需自行编译安装  
+安装VapourSynth (http://www.vapoursynth.com/doc/installation.html)  
+请选择VapourSynth installer (也就是不带Portable后缀的.exe安装包)，程序会根据python位宽自动选择32/64位  
+之后还需要VapourSynth版的VSFilterMod (https://github.com/sorayuki/VSFilterMod/releases)  
+x86对应32位python，x64对应64位，请与python位宽保持一致  
+下载对应版本后将压缩包中的VSFilterMod.dll复制到VapourSynth插件文件夹中 (http://www.vapoursynth.com/doc/autoloading.html)  
+如32位VapourSynth对应的路径是C:\\Program Files (x86)\\VapourSynth\\plugins32  
+
+#使用  
+压制B站非大会员不二压视频 (可选内嵌.ass字幕)，双击Bili_Enc.py，按提示操作  
