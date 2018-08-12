@@ -59,6 +59,12 @@
 	- x86对应32位python，x64对应64位，请与python位宽保持一致  
 	- 下载对应版本后将压缩包中的VSFilterMod.dll复制到VapourSynth插件文件夹中 (http://www.vapoursynth.com/doc/autoloading.html )  
 	- 例: 32位VapourSynth对应的路径是C:\\Program Files (x86)\\VapourSynth\\plugins32  
+1. 以类似的方式安装ffms2 (https://github.com/FFMS/ffms2/releases )  
+	- 下载.7z压缩包后，32位库位于x86文件夹下，64位库位于x64文件夹
 
 # 使用  
 压制B站非大会员不二压视频 (可选内嵌.ass字幕)，双击Bili_Enc.py，按提示操作  
+**字幕文件所在文件夹的绝对路径中只能有ASCII字符**  
+	- 如果你将字幕放在C:\\翻译\\New Project中，那么压制会因为路径中有“翻译”这个文件夹名而失败  
+	- 字幕文件的文件名反倒不用担心，脚本会自动复制并更名  
+		- C:\\SOUND HOLIC\\PVD\\TOKUTEN\\MP4\\東方好八起トレーラー.ass 可以压制  
