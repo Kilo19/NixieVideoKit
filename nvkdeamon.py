@@ -3,6 +3,20 @@
 '''
 自动监测生肉文件夹变化，如果有新文件进入自动启动压制
 '''
+
+import sys
+def show_exception_and_exit(exc_type, exc_value, tb):
+	import traceback
+	traceback.print_exception(exc_type, exc_value, tb)
+	input('''脚本遇到错误，请截图此画面发送给Kilo19。5秒后继续
+	Error encountered, please send a screenshot of this error to Kilo19
+	Press Enter to Exit
+	''')
+	import time
+	time.sleep(5)
+
+sys.excepthook = show_exception_and_exit
+
 import subprocess
 import codecs
 import time
@@ -84,6 +98,8 @@ def DeamonHelper(inName, argLen, scriptName, fileHead):
 			print(inName + ' command: ' + time.ctime())
 			for arg in args:
 				print(arg)
+			# For safety
+			time.sleep(0.5)
 			subprocess.Popen(
 				[
 					'py', '-3', os.path.join(scriptDir, scriptName + '.py')
@@ -121,7 +137,7 @@ if __name__ == "__main__":
 		DeamonHelper("BE", 3, "Bili_Enc", beHead)
 
 		ingredientsListPath = os.path.join(
-			customDownDir, 'ingredientsList' + '.txt'
+			scriptDir, 'ingredientsList' + '.txt'
 		)
 		ingredients = ListIngredients(customDownDir, '[BE_', 'mp4')
 

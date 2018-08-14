@@ -1,6 +1,17 @@
 # -*- coding: utf-8 -*-
-import vapoursynth as vs
 import sys
+def show_exception_and_exit(exc_type, exc_value, tb):
+	import traceback
+	traceback.print_exception(exc_type, exc_value, tb)
+	input('''脚本遇到错误，请截图此画面发送给Kilo19。按回车键退出
+	Error encountered, please send a screenshot of this error to Kilo19
+	Press Enter to Exit
+	''')
+	sys.exit(-1)
+
+sys.excepthook = show_exception_and_exit
+
+import vapoursynth as vs
 import os
 
 core = vs.get_core()

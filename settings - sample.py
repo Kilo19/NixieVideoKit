@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 #下载视频是否使用代理
 #禁止传播带有有效voicebaseToken的设置文件
+import os
 useProxy = False
 #代理地址和端口
 proxy = 'localhost:1080'
@@ -11,11 +12,11 @@ source720p = False
 #禁用则下载到脚本所在文件夹下的Video子文件夹)
 overrideDownDir = True
 #自定义下载目录路径
-customDownDirRelative = 'NixieVideoDepot\\'
-customDownDirRoot = 'L:\\'
-customDownDir = customDownDirRoot + customDownDirRelative
+customDownDirRelative = 'NixieVideoDepot/'.replace('/', os.sep)
+customDownDirRoot = 'L:/'.replace('/', os.sep)
+customDownDir = os.path.join(customDownDirRoot, customDownDirRelative)
 #降低转码优先级防止转码时电脑卡顿，6核及以下建议开启
-#注意需要安装psutil以启用该功能，安装参考Readme
+#注意需要安装psutil以启用该功能
 useQuell = False
 #是否启用自定义输出目录 (默认启用)
 #转码时手动指定输出路径则无视该选项
@@ -28,14 +29,10 @@ useQuell = False
 #(没有则自动在customOutDir中创建)
 #否则输出到源视频同目录下
 overrideOutDir = True
-cloudRoot = 'L:\\NixieCloud\\'
-cloudDir = 'Raw\\LMG\\'
-curMonthDir = '2018\\MAY\\'
-customOutDir = cloudRoot + cloudDir + curMonthDir
-#使用Voicebase
-#没有Token则不能开启
-#否则会报错
-useVoicebase = False
+cloudRoot = 'L:/NixieCloud/'.replace('/', os.sep)
+cloudDir = 'Raw/LMG/'.replace('/', os.sep)
+curMonthDir = '2018/AUG/'.replace('/', os.sep)
+customOutDir = os.path.join(cloudRoot, cloudDir, curMonthDir)
 #Bili_Enc最高码率，单位kbps，支持压制ass字幕
 #一般用于投稿
 #使用crf分配码率
@@ -61,6 +58,8 @@ beDecisionHeight = 1080
 nceBitrate = 1000
 #NixieCloud_Enc预设
 ncePreset = 'slow'
-#使用voicebase需要Token
-#参考voicebase本身API
+#是否使用Voicebase
+#没有Token无法使用，会报错
+useVoicebase = False
+#使用voicebase所需的Token，参考voicebase本身API
 voicebaseToken = '请输入你自己的token'

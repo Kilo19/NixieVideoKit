@@ -1,7 +1,7 @@
 #! python3
 # -*- coding: utf-8 -*-
-#Nixie Video Kit Supporting Library
-#NixieVideoKit is licensed under MIT license (https://github.com/Kilo19/NixieVideoKit/blob/master/LICENSE.txt)
+# Nixie Video Kit Supporting Library
+# NixieVideoKit is licensed under MIT license (https://github.com/Kilo19/NixieVideoKit/blob/master/LICENSE.txt)
 import sys
 def show_exception_and_exit(exc_type, exc_value, tb):
 	import traceback
@@ -661,9 +661,12 @@ def be():
 	sourceVideo_split[1:] = os.path.splitext(sourceVideo_split[1])
 
 	temp = GetTemp(sourceVideo_split)
-	#VSFilterMod still sucks at non-ASCII
-	#Luckily subtitles are small compared to videos
-	#We can afford copying subs to a nice path
+	# VSFilterMod still sucks at non-ASCII
+	# Luckily subtitles are small compared to videos
+	# We can afford copying subs to a nice path
+	# Make sure its top-level are also ASCII
+	# Sorayuki says VSFilterMod will soon have wide character support
+	# hopefully this restriction will go away
 	if os.path.isfile(sourceSub):
 		shutil.copy(sourceSub, temp['sub_path'])
 		vsPipeArgsFull = prepareVsPipeParam(sourceVideo, temp['sub_path'], libDir, settings.beDecisionHeight)
