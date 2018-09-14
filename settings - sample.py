@@ -31,7 +31,7 @@ useQuell = False
 overrideOutDir = True
 cloudRoot = 'L:/NixieCloud/'.replace('/', os.sep)
 cloudDir = 'Raw/LMG/'.replace('/', os.sep)
-curMonthDir = '2018/AUG/'.replace('/', os.sep)
+curMonthDir = '2018/SEP/'.replace('/', os.sep)
 customOutDir = os.path.join(cloudRoot, cloudDir, curMonthDir)
 #Bili_Enc最高码率，单位kbps，支持压制ass字幕
 #一般用于投稿
@@ -41,7 +41,7 @@ customOutDir = os.path.join(cloudRoot, cloudDir, curMonthDir)
 #属于正常现象
 #若原视频达到beBitrate(单位kbps)的90%则采用2-pass压制
 #时间是1-pass CRF至少两倍，但码率保证等于beBitrate
-beBitrate = 3000
+beBitrate = 6000
 beCRF = 25
 #Bili_Enc预设
 bePreset = 'slow'
