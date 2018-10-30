@@ -16,7 +16,7 @@ import os
 
 core = vs.get_core()
 sourceVideo = sourceVideo.decode('utf-8')
-sourceSub = sourceSub.decode('utf-8')
+sourceSub = sourceSub.decode('gbk')
 targetWidth = targetWidth.decode('utf-8')
 targetHeight = targetHeight.decode('utf-8')
 
@@ -38,6 +38,8 @@ if os.path.isfile(sourceVideo):
 		)
 	else:
 		video = core.ffms2.Source(sourceVideo)
+else:
+	input("Unable to access video " + sourceVideo)
 
 if os.path.isfile(sourceSub):
 	#video = core.sub.TextFile(clip = video, file = sourceSub)

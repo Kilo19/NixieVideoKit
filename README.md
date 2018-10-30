@@ -44,8 +44,8 @@
 
 # 安装  
 1. 将settings - sample.py重命名为settings.py  
-1. 安装python 3.6 (https://www.python.org/downloads/ )
-	- 3.6中任何一个子版本均可  
+1. VapourSynth R45以下安装python 3.6 (https://www.python.org/downloads/ )，R45及以上安装python 3.7
+	- 3.6或3.7中任何一个子版本均可 (如3.6.1与3.6.7, 3.7.0与3.7.1)  
 	- 32(x86)或64位(x86-64)均可，但后面安装VapourSynth和VSFilterMod需要匹配  
 	- 32位库更多，上手的话个人建议32位  
 	- **安装时请勾选Add Python to PATH**，安装结束时建议选择Disable Path Length Limit  

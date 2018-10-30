@@ -1,7 +1,7 @@
-﻿#! python3
+#! python3
 # -*- coding: utf-8 -*-
 #本脚本在python 3.6下开发，请使用python 3运行
-#win&GNU/Linux请用管理员权限安装pyperclip模块
+#请用管理员权限安装pyperclip模块
 #win: 以管理员权限运行命令提示符 (win+x, a; 或在开始菜单搜索cmd.exe右键管理员权限运行)
 #然后输入py -3 -m pip install pyperclip回车
 #GNU/Linux: 首先确认是否有pip, 没有的话安装 https://packaging.python.org/install_requirements_linux/#installing-pip-setuptools-wheel-with-linux-package-managers
@@ -15,11 +15,11 @@ while True:
 	else:
 		offsetSec = int(parse[:curPos])
 		parse = parse[curPos+1:]
-	
+
 	curPos = parse.find(':')
 	totalMin = int(parse[:curPos])
 	parse = parse[curPos+1:]
-	
+
 	curPos = parse.find(',')
 	if curPos == -1:
 		totalSec = int(parse)
@@ -28,7 +28,7 @@ while True:
 		totalSec = int(parse[:curPos])
 		parse = parse[curPos+1:].strip()
 		people = int(parse)
-	
+
 	s = ''
 	min = [offsetSec // 60]
 	sec = [offsetSec % 60]
