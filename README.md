@@ -48,6 +48,7 @@
 	- 3.6或3.7中任何一个子版本均可 (如3.6.1与3.6.7, 3.7.0与3.7.1)  
 	- 32(x86)或64位(x86-64)均可，但后面安装VapourSynth和VSFilterMod需要匹配  
 	- 32位库更多，上手的话个人建议32位  
+	- 安装64位则需要修改nvksupport.py:47的vspipe_exec以指向64位版vspipe  
 	- **安装时请勾选Add Python to PATH**，安装结束时建议选择Disable Path Length Limit  
 	- Install for all users可以不选，选了的话未来通过pip安装新的python库需要管理员权限  
 1. 安装ffmpeg (https://ffmpeg.org/ )
