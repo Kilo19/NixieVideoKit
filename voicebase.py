@@ -29,13 +29,11 @@ def pretty_print_POST(req):
 
 
 def SubmitMedia(audioIn):
-	url = 'https://apis.voicebase.com/v2-beta/media'
+	url = 'https://apis.voicebase.com/v3/media'
 	configuration = {
-		'configuration': {
-			'executor': 'v2',
-			'transcripts': {
-				'engine': 'premium',
-				'formatNumbers': ['digits']
+		'transcript':{
+			'formatting':{
+				'enableNumberFormatting':'true'
 			}
 		}
 	}
@@ -57,7 +55,7 @@ def SubmitMedia(audioIn):
 
 def PollAndSpitJson(mediaId, outPath):
 	outJsonPath = outPath + '.json'
-	url = 'https://apis.voicebase.com/v2-beta/media/%s' % mediaId
+		url = 'https://apis.voicebase.com/v3/media/%s' % mediaId
 	headers = {'Authorization': 'Bearer ' + voicebaseToken}
 	while True:
 		r = requests.get(url, headers=headers)
