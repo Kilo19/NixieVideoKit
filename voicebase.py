@@ -55,7 +55,7 @@ def SubmitMedia(audioIn):
 
 def PollAndSpitJson(mediaId, outPath):
 	outJsonPath = outPath + '.json'
-		url = 'https://apis.voicebase.com/v3/media/%s' % mediaId
+	url = 'https://apis.voicebase.com/v3/media/%s' % mediaId
 	headers = {'Authorization': 'Bearer ' + voicebaseToken}
 	while True:
 		r = requests.get(url, headers=headers)
