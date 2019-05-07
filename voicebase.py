@@ -60,8 +60,8 @@ def PollAndSpitJson(mediaId, outPath):
 	while True:
 		r = requests.get(url, headers=headers)
 		jsonObj = r.json()
-		if jsonObj['media']['status'] != 'finished':
-			print('File processing, current status:' + jsonObj['media']['status'])
+		if jsonObj['status'] != 'finished':
+			print('File processing, current status:' + jsonObj['status'])
 			print('Next call in 10 seconds...')
 			time.sleep(10)
 		else:
@@ -76,7 +76,7 @@ def SpitTranscriptFromJson(jsonIn, outPath):
 	outTxt = codecs.open(outTxtPath, 'w', 'utf-8')
 
 	data = jsonIn
-	words = data["media"]["transcripts"]["latest"]["words"]
+	words = data["transcript"]["words"]
 	outList = [words[0]['w']]
 	
 	for i in range(1, len(words)):
