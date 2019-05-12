@@ -442,7 +442,12 @@ Comment: 0,0:00:00.00,0:00:00.01,Default,,0,0,0,,选中此行以检查漏掉的�
 		recogFile = codecs.open(recogPath, 'r', 'utf-8')
 		recogJson = json.load(recogFile)
 		recogFile.close()
-		recogWordsWithTime = recogJson["media"]["transcripts"]["latest"]["words"]
+		# Voicebase v3
+		if "transcript" in recogJson.keys():
+			recogWordsWithTime = recogJson["transcript"]["words"]
+		# Voicebase v2
+		else:
+			recogWordsWithTime = recogJson["media"]["transcripts"]["latest"]["words"]
 		recogWordsWithTime = filter_json(recogWordsWithTime)
 		recogWords = [
 			format_text(recogWordWithTime["w"])
