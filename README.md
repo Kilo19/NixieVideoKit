@@ -44,24 +44,25 @@
 
 # 安装  
 1. 将settings - sample.py重命名为settings.py  
-1. VapourSynth R45以下安装python 3.6 (https://www.python.org/downloads/ )，R45及以上安装python 3.7
+1. VapourSynth R45以下安装python 3.6 (https://www.python.org/downloads/)，R45及以上安装python 3.7
 	- 3.6或3.7中任何一个子版本均可 (如3.6.1与3.6.7, 3.7.0与3.7.1)  
 	- 32(x86)或64位(x86-64)均可，但后面安装VapourSynth和VSFilterMod需要匹配  
 	- 32位库更多，上手的话个人建议32位  
 	- 安装64位则需要修改nvksupport.py:47的vspipe_exec以指向64位版vspipe  
 	- **安装时请勾选Add Python to PATH**，安装结束时建议选择Disable Path Length Limit  
 	- Install for all users可以不选，选了的话未来通过pip安装新的python库需要管理员权限  
-1. 安装ffmpeg (https://ffmpeg.org/ )
-	- 建议走chocolatey (https://chocolatey.org/ ), ffmpeg包地址: https://chocolatey.org/packages/ffmpeg  
+1. 安装ffmpeg (https://ffmpeg.org/)
+	- 建议走chocolatey (https://chocolatey.org/), ffmpeg包地址: https://chocolatey.org/packages/ffmpeg  
 1. 代码库自带编译好的fdkaac (位于Program文件夹下)，无需自行编译安装  
-1. 安装VapourSynth (http://www.vapoursynth.com/doc/installation.html )  
+1. 安装VapourSynth (http://www.vapoursynth.com/doc/installation.html)  
 	- 请选择VapourSynth installer (也就是不带Portable后缀的.exe安装包)，程序会根据python位宽自动选择32/64位  
-1. 还需要VapourSynth版的VSFilterMod (https://github.com/sorayuki/VSFilterMod/releases )  
+1. 还需要VapourSynth版的VSFilterMod (https://github.com/sorayuki/VSFilterMod/releases)  
 	- x86对应32位python，x64对应64位，请与python位宽保持一致  
-	- 下载对应版本后将压缩包中的VSFilterMod.dll复制到VapourSynth插件文件夹中 (http://www.vapoursynth.com/doc/autoloading.html )  
+	- 下载对应版本后将压缩包中的VSFilterMod.dll复制到VapourSynth插件文件夹中 (http://www.vapoursynth.com/doc/autoloading.html)  
 	- 例: 32位VapourSynth对应的路径是C:\\Program Files (x86)\\VapourSynth\\plugins32  
-1. 以类似的方式安装ffms2 (https://github.com/FFMS/ffms2/releases )  
-	- 下载.7z压缩包后，32位库位于x86文件夹下，64位库位于x64文件夹
+1. 以类似的方式安装ffms2 (https://github.com/FFMS/ffms2/releases)  
+	- 下载.7z压缩包后，32位库位于x86文件夹下，64位库位于x64文件夹  
+1. 如果要使用Voicebase.py可能需要安装requests (https://pypi.org/project/requests/)  
 
 # 使用  
 压制B站视频 (可选内嵌.ass字幕)，双击Bili_Enc.py，按提示操作  
