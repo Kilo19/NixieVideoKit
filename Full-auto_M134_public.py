@@ -301,7 +301,6 @@ def PreFormatLine(line):
 	line = line.replace('（', ' (')
 	line = line.replace('）', ') ')
 	line = line.replace('﻿', '')
-	line = re.sub(r'\[\w+\]', '', line)
 	line = re.sub(r'^[（\\(]*注[：:\uff1a] *', '※', line)
 	if line.find('[') != -1:
 		line = re.sub(r'\[([^]]*)\]\(http[^]]*\)', r'\1', line)
