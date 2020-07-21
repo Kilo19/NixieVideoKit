@@ -314,7 +314,7 @@ def encodeVid_pipeFF2pass(pipeArgs, log, videoOut, targetBitRate, preset):
 				'-map', '0:v',
 				'-c:v', 'libx264',
 				'-preset', preset,
-				'-x264-params', 'me=umh:qcomp=0.9:ap-mode=3:merange=48',
+				'-x264-params', 'me=umh:qcomp=0.9:aq-mode=3:merange=48',
 				'-b:v', str(targetBitRate) + 'k']
 	ffHead += ['-passlogfile', log]
 	firstPassArgs = ffHead + ['-y', '-pass', '1', '-f', 'mp4', 'NUL']
