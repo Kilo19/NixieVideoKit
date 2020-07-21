@@ -7,6 +7,7 @@
 - NixieCloud_Enc.py：启动生肉/预览版压制  
 - settings - sample.py：nvksupport的配置文件，详情查看文件内注释。使用时请更名为settings.py  
 - voicebase.py：抓取机器识别稿，自带时间戳，精确到词，使用需要voicebase的token  
+- gcstt.py：与voicebase.py用法一致，但使用Google Cloud  
 - Full-auto_M134_public.py: 从双语文本稿生成ass文件，如果搭配voicebase输出的json可以自动生成时间戳（打轴）  
 - 翻译分段.py：按视频长度和翻译人数生成每个翻译负责的时间段  
 - Adaptive CRF.tm & .pdf：论证了CRF和视频体积的关系（英文）  
