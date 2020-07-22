@@ -63,3 +63,5 @@ ncePreset = 'slow'
 useVoicebase = False
 #使用voicebase所需的Token，参考voicebase本身API
 voicebaseToken = '请输入你自己的token'
+#使用Google Cloud所需的Storage Bucket Name
+gcsbucketName = '请输入你自己的bucket名称'

@@ -64,12 +64,15 @@
 1. 以类似的方式安装ffms2 (https://github.com/FFMS/ffms2/releases)  
 	- 下载.7z压缩包后，32位库位于x86文件夹下，64位库位于x64文件夹  
 1. 如果要使用Voicebase.py可能需要安装requests (https://pypi.org/project/requests/)  
-1. 如果要使用gcstt.py需要安装[google-cloud-speech](https://pypi.org/project/google-cloud-speech/)与[google-cloud-storage](https://pypi.org/project/google-cloud-storage/)，并将Google Cloud服务帐号密钥路径添加至环境变量。
+1. 如果要使用gcstt.py需要  
+	- 安装[google-cloud-speech](https://pypi.org/project/google-cloud-speech/)与[google-cloud-storage](https://pypi.org/project/google-cloud-storage/)  
+	- 在settings里设置**自己**的bucket name  
+	- 将Google Cloud服务帐号密钥路径添加至环境变量
 
-        #Windows PowerShell
-		env:GOOGLE_APPLICATION_CREDENTIALS="[PATH]"
-		#Linux
-        export GOOGLE_APPLICATION_CREDENTIALS="[PATH]"
+            #Windows PowerShell
+		    env:GOOGLE_APPLICATION_CREDENTIALS="[PATH]"
+		    #Linux
+            export GOOGLE_APPLICATION_CREDENTIALS="[PATH]"
 
 
 # 使用  

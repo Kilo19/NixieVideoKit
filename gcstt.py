@@ -13,6 +13,7 @@ from google.cloud import speech_v1p1beta1
 from google.cloud.speech_v1p1beta1 import enums
 from google.cloud.speech_v1p1beta1 import types
 from google.cloud import storage
+from settings import gcsbucketName
 
 def generate_json(response):
     vbjson = {'transcript': {'words':[]}}
@@ -50,12 +51,12 @@ def speech_to_text(gcs_uri):
 def upload_to_gcs(audio_filename):
     basename = os.path.basename(audio_filename)
     storage_client = storage.Client()
-    bucket_name = "nvkstt"
+    bucket_name = gcsbucketName
     try:
         bucket = storage_client.get_bucket(bucket_name)
     except:
         bucket = storage_client.create_bucket(bucket_name)
-    blob = bucket.blob(basename)
+    blob = bucket.blob(basename,chunk_size=5*1024*1024)
     blob.upload_from_filename(audio_filename)
     gcs_uri = "gs://"+bucket_name+'/'+basename
     return (gcs_uri)
@@ -63,7 +64,7 @@ def upload_to_gcs(audio_filename):
 def clean_gcs(audio_filename):
     basename = os.path.basename(audio_filename)
     storage_client = storage.Client()
-    bucket_name = "nvkstt"
+    bucket_name = gcsbucketName
     bucket = storage_client.get_bucket(bucket_name)
     blob = bucket.blob(basename)
     blob.delete()
